@@ -214,6 +214,14 @@
     input:invalid {
         border-color: red;
     }
+
+    .nav-link {
+        color: black;
+    }
+
+    .nav-link:hover {
+        color: blueviolet;
+    }
 </style>
 
 <body>
@@ -234,6 +242,20 @@
         <a href="/" class="links"> Home </a>
         <a href="{% url 'main:add_blog' %}" class="links"> Add Blog </a>
         <a href="{% url 'main:read_blog' %}" class="links"> Read Blogs </a>
+
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <h6 class="nav-link">welcome, {{ request.user.username }}</h6>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user:logout' %}"> Log out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user:login' %}"> Sign in</a>
+        </li>
+        {% endif %}
+        </ul>
 
         <form role="search" action="{% url 'main:search' %}" method="get">
             <input name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">

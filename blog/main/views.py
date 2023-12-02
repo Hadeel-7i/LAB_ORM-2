@@ -81,7 +81,7 @@ def search(request: HttpRequest):
 
     if "search" in request.GET:
         keyword = request.GET["search"]
-        blog = Blog.objects.filter(blog__contains=keyword)
+        blog = Blog.objects.filter(name__icontains=keyword)
     else:
         blog = Blog.objects.all()
 
